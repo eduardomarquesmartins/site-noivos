@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  /* Lumina Exclusive Palette */
+  --lumina-gold: #D4AF37;
+  --lumina-gold-light: #F3E5AB;
+  --lumina-gold-dark: #926614;
+  --lumina-gold-deep: #2C1A14;
+  
+  --lumina-rose: #B76E79;
+  --lumina-ivory: #FFFEFC; /* Mais claro e limpo */
+  --lumina-silk: #F9F8F6;
+  
+  --lumina-glass-bg: rgba(255, 255, 255, 0.7); /* Mais opaco para parecer mais branco */
+  --lumina-glass-border: rgba(212, 175, 55, 0.15);
+  
+  --background: var(--lumina-ivory);
+  --foreground: #1A1A1A;
+
+  --superellipse: 32px;
+}
+
+@theme inline {
+  --color-lumina-gold: var(--lumina-gold);
+  --color-lumina-gold-light: var(--lumina-gold-light);
+  --color-lumina-gold-dark: var(--lumina-gold-dark);
+  --color-lumina-rose: var(--lumina-rose);
+  --color-lumina-ivory: var(--lumina-ivory);
+  
+  --shadow-lumina: 0 20px 50px -12px rgba(146, 102, 20, 0.15);
+  --shadow-lumina-hover: 0 40px 80px -15px rgba(146, 102, 20, 0.25);
+  
+  --radius-superellipse: var(--superellipse);
+}
+
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Glassmorphism Classes */
+.glass-premium {
+  background-color: var(--lumina-glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--lumina-glass-border);
+  box-shadow: var(--shadow-lumina);
+}
+
+.glass-dark {
+  background-color: rgba(26, 26, 26, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.glass-premium:hover, .glass-dark:hover {
+  box-shadow: var(--shadow-lumina-hover);
+}
+
+/* Luxury Grain Effect */
+.grainy-bg {
+  position: relative;
+}
+
+.grainy-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity: 0.1; /* Reduzido de 0.2 para ficar mais sutil */
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Utilitários Extras */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE e Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Marquee Infinite — CSS puro para melhor performance */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
+  will-change: transform;
+}
